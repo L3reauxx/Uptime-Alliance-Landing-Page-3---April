@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Uptime Alliance — The Next Chapter</title>
+<meta name="description" content="Uptime Alliance is evolving from Oxygen Alliance to build durable health infrastructure and improve biomedical equipment uptime across LMICs.">
+<meta property="og:title" content="Uptime Alliance — The Next Chapter">
+<meta property="og:description" content="Uptime Alliance is evolving from Oxygen Alliance to build durable health infrastructure and improve biomedical equipment uptime across LMICs.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="./Logos/uptime-logo-coloured.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -58,6 +63,11 @@ body::before {
   font-family:var(--font-disp);
   font-size:1.2rem; letter-spacing:0.14em;
   color:var(--accent); text-decoration:none;
+}
+.header-logo-text img {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 .header-tag {
   font-family:var(--font-mono);
@@ -483,10 +493,17 @@ hr.rule { border:none; border-top:1px solid var(--border); margin:0; }
   font-family:var(--font-disp); font-size:0.95rem;
   letter-spacing:0.14em; color:var(--accent);
 }
+.footer-brand img {
+  height: 24px;
+  width: auto;
+  display: block;
+}
 .footer-copy {
   font-size:0.62rem; font-family:var(--font-mono);
   color:var(--muted); letter-spacing:0.12em;
 }
+
+.accent { color: var(--accent); }
 
 /* ── SCROLL REVEAL ── */
 .reveal {
@@ -511,7 +528,9 @@ hr.rule { border:none; border-top:1px solid var(--border); margin:0; }
 <body>
 
 <header class="site-header">
-  <a href="#" class="header-logo-text">UPTIME ALLIANCE</a>
+  <a href="#" class="header-logo-text">
+    <img src="./Logos/uptime-logo-coloured.png" alt="Uptime Alliance Logo">
+  </a>
   <span class="header-tag">Est. 2024 — Formerly Oxygen Alliance</span>
   <span class="live-dot">New Chapter</span>
 </header>
@@ -526,7 +545,7 @@ hr.rule { border:none; border-top:1px solid var(--border); margin:0; }
         <span class="hero-from">Oxygen Alliance</span>
         <span class="hero-bridge-word">is evolving to become</span>
         <span class="hero-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
       </div>
       <h1 class="hero-heading">UPTIME ALLIANCE.</h1>
@@ -606,7 +625,7 @@ hr.rule { border:none; border-top:1px solid var(--border); margin:0; }
     <div class="method-cards reveal">
       <div class="method-card">
         <span class="card-num">01 / 03</span>
-        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <svg aria-hidden="true" focusable="false" class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
           <circle cx="9" cy="7" r="4"/>
           <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
@@ -619,7 +638,7 @@ hr.rule { border:none; border-top:1px solid var(--border); margin:0; }
 
       <div class="method-card">
         <span class="card-num">02 / 03</span>
-        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <svg aria-hidden="true" focusable="false" class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
           <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
         </svg>
@@ -630,7 +649,7 @@ hr.rule { border:none; border-top:1px solid var(--border); margin:0; }
 
       <div class="method-card">
         <span class="card-num">03 / 03</span>
-        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <svg aria-hidden="true" focusable="false" class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <circle cx="18" cy="5" r="3"/>
           <circle cx="6" cy="12" r="3"/>
           <circle cx="18" cy="19" r="3"/>
@@ -658,17 +677,17 @@ hr.rule { border:none; border-top:1px solid var(--border); margin:0; }
 
     <form id="uptime-form" autocomplete="off">
       <div class="form-grid reveal d1">
-        <div class="form-field"><input type="text" name="firstName" placeholder="First Name" required></div>
-        <div class="form-field"><input type="text" name="lastName" placeholder="Last Name" required></div>
+        <div class="form-field"><input type="text" name="firstName" placeholder="First Name" aria-label="First Name" required></div>
+        <div class="form-field"><input type="text" name="lastName" placeholder="Last Name" aria-label="Last Name" required></div>
       </div>
       <div class="form-grid reveal d2">
-        <div class="form-field"><input type="text" name="organization" placeholder="Organization" required></div>
-        <div class="form-field"><input type="email" name="email" placeholder="Email Address" required></div>
+        <div class="form-field"><input type="text" name="organization" placeholder="Organization" aria-label="Organization" required></div>
+        <div class="form-field"><input type="email" name="email" placeholder="Email Address" aria-label="Email Address" required></div>
       </div>
       <div class="submit-wrap reveal d3">
         <button type="submit" class="cta-btn">
           I Commit to Uptime
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
         <span class="social-proof">Joining health system champions across <span>LMICs</span></span>
       </div>
@@ -678,7 +697,9 @@ hr.rule { border:none; border-top:1px solid var(--border); margin:0; }
 
 <!-- ── FOOTER ── -->
 <footer class="site-footer">
-  <span class="footer-brand">UPTIME ALLIANCE</span>
+  <span class="footer-brand">
+    <img src="./Logos/uptime-logo-black.png" alt="Uptime Alliance Logo">
+  </span>
   <span class="footer-copy">© 2024 Uptime Alliance — Formerly Oxygen Alliance</span>
 </footer>
 
@@ -718,7 +739,7 @@ document.querySelectorAll('.stat-num[data-count]').forEach(el => cio.observe(el)
 document.getElementById('uptime-form').addEventListener('submit', function(e){
   e.preventDefault();
   const btn = this.querySelector('.cta-btn');
-  btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:.9rem;height:.9rem;stroke-width:2.5"><polyline points="20 6 9 17 4 12"/></svg> Committed. We\'ll be in touch.';
+  btn.innerHTML = '<svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:.9rem;height:.9rem;stroke-width:2.5"><polyline points="20 6 9 17 4 12"/></svg> Committed. We\'ll be in touch.';
   btn.disabled = true;
   btn.style.opacity = '0.85';
 });
