@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uptime Alliance — The Next Chapter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:         #fafaf8;
+  --bg-2:       #f2f2ee;
+  --surface:    #ebebе6;
+  --border:     rgba(0,0,0,0.09);
+  --text:       #2a2e2b;
+  --muted:      #7a8a7d;
+  --accent:     #1e5c2e;
+  --accent-bright: #7ab840;
+  --accent-dim: rgba(30,92,46,0.07);
+  --accent-mid: rgba(30,92,46,0.22);
+  --ink:        #0f1410;
+  --font-disp:  'Bebas Neue', sans-serif;
+  --font-body:  'DM Sans', sans-serif;
+  --font-mono:  'DM Mono', monospace;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Subtle paper grain */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:1000; opacity:0.5;
+}
+
+/* ── HEADER ── */
+.site-header {
+  position:fixed; top:0; left:0; right:0; z-index:900;
+  padding:1.1rem 3rem;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  background:rgba(250,250,248,0.92);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+.header-logo-text {
+  font-family:var(--font-disp);
+  font-size:1.2rem; letter-spacing:0.14em;
+  color:var(--accent); text-decoration:none;
+}
+.header-tag {
+  font-family:var(--font-mono);
+  font-size:0.62rem; letter-spacing:0.16em;
+  color:var(--muted); text-transform:uppercase;
+}
+.live-dot {
+  display:inline-flex; align-items:center; gap:0.45rem;
+  font-family:var(--font-mono); font-size:0.6rem;
+  letter-spacing:0.14em; color:var(--accent); text-transform:uppercase;
+}
+.live-dot::before {
+  content:''; width:6px; height:6px; border-radius:50%;
+  background:var(--accent-bright);
+  box-shadow:0 0 0 0 rgba(34,193,96,0.5);
+  animation:ping 1.8s ease-in-out infinite;
+}
+@keyframes ping {
+  0%  { box-shadow:0 0 0 0 rgba(122,184,64,0.5); }
+  70% { box-shadow:0 0 0 7px rgba(122,184,64,0); }
+  100%{ box-shadow:0 0 0 0 rgba(122,184,64,0); }
+}
+
+/* ── HERO ── */
+.hero {
+  display:flex; flex-direction:column; justify-content:flex-start;
+  padding:7rem 3rem 3.5rem;
+  position:relative; overflow:hidden;
+  background:var(--bg);
+}
+
+/* Large watermark */
+.hero-bg-num {
+  position:absolute; right:-0.04em; top:50%;
+  transform:translateY(-50%);
+  font-family:var(--font-disp);
+  font-size:clamp(12rem,22vw,28rem);
+  color:transparent;
+  -webkit-text-stroke:1.5px rgba(30,92,46,0.05);
+  line-height:1; pointer-events:none; user-select:none; z-index:0;
+}
+
+/* Left accent rule */
+.hero::after {
+  content:'';
+  position:absolute; top:0; bottom:0; left:calc(3rem - 1px);
+  width:1px; background:var(--border);
+  pointer-events:none;
+}
+
+/* Two-column layout */
+.hero-inner {
+  position:relative; z-index:1;
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap:3rem;
+  align-items:end;
+  max-width:1100px;
+  padding-left:2rem;
+}
+@media(max-width:680px){
+  .hero-inner { grid-template-columns:1fr; gap:1.5rem; }
+}
+
+/* Left column */
+.hero-left { display:flex; flex-direction:column; }
+
+.eyebrow {
+  font-family:var(--font-mono);
+  font-size:0.6rem; letter-spacing:0.22em;
+  color:var(--accent); text-transform:uppercase;
+  margin-bottom:0.75rem;
+  display:flex; align-items:center; gap:0.8rem;
+  opacity:0; transform:translateY(16px);
+  animation:fadeUp 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.eyebrow::before {
+  content:''; display:block; width:1.5rem; height:1px; background:var(--accent);
+}
+
+/* Transition line */
+.hero-transition {
+  display:flex; align-items:center; gap:0.75rem; flex-wrap:nowrap;
+  margin-bottom:0.5rem;
+  opacity:0; transform:translateY(22px);
+  animation:fadeUp 0.9s 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.hero-from {
+  font-family:var(--font-disp);
+  font-size:clamp(1.1rem,2.4vw,2rem);
+  letter-spacing:0.08em; color:var(--muted);
+  line-height:1; white-space:nowrap;
+}
+.hero-arrow {
+  display:flex; align-items:center;
+  color:var(--accent-bright); flex-shrink:0;
+}
+.hero-arrow svg { width:clamp(1rem,1.8vw,1.4rem); height:auto; stroke-width:2; }
+.hero-bridge-word {
+  font-family:var(--font-body);
+  font-size:clamp(0.65rem,1vw,0.8rem);
+  font-weight:300; color:var(--muted);
+  letter-spacing:0.14em; text-transform:uppercase;
+  white-space:nowrap; flex-shrink:0;
+}
+
+/* Main heading — big and dominant */
+.hero-heading {
+  font-family:var(--font-disp);
+  font-size:clamp(4.5rem,9vw,8.5rem);
+  letter-spacing:0.04em;
+  color:var(--accent);
+  line-height:0.92;
+  white-space:nowrap;
+  margin-bottom:0;
+  opacity:0; transform:translateY(28px);
+  animation:fadeUp 1s 0.55s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+/* Right column — stat cards stacked vertically */
+.hero-stats {
+  display:flex; flex-direction:column; gap:0;
+  border:1px solid var(--border); border-radius:2px;
+  overflow:hidden; width:200px;
+  opacity:0; animation:fadeUp 1s 0.75s cubic-bezier(0.16,1,0.3,1) forwards;
+  box-shadow:0 1px 4px rgba(0,0,0,0.05);
+  flex-shrink:0;
+}
+@media(max-width:680px){
+  .hero-stats { flex-direction:row; width:100%; }
+}
+.hero-stat {
+  flex:1; padding:1rem 1.25rem;
+  border-bottom:1px solid var(--border);
+  position:relative; cursor:default;
+  transition:background 0.3s; background:var(--bg);
+}
+.hero-stat:last-child { border-bottom:none; }
+@media(max-width:680px){
+  .hero-stat { border-bottom:none; border-right:1px solid var(--border); }
+  .hero-stat:last-child { border-right:none; }
+}
+.hero-stat:hover { background:var(--bg-2); }
+.hero-stat::before {
+  content:''; position:absolute; top:0; left:0; bottom:0; width:2px;
+  background:var(--accent); transform:scaleY(0); transform-origin:top;
+  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-stat:hover::before { transform:scaleY(1); }
+.stat-num {
+  font-family:var(--font-disp);
+  font-size:clamp(1.8rem,2.8vw,2.4rem);
+  color:var(--accent); letter-spacing:0.04em;
+  line-height:1; display:block;
+}
+.stat-label {
+  font-size:0.58rem; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--muted);
+  margin-top:0.2rem; display:block; font-weight:400;
+  line-height:1.4;
+}
+
+/* Scroll nudge — bottom of hero */
+.hero-scroll {
+  position:relative; z-index:1;
+  display:flex; align-items:center; gap:0.75rem;
+  padding-left:2rem; padding-top:1.75rem;
+  opacity:0; animation:fadeUp 1s 1.1s ease forwards;
+}
+.hero-scroll span {
+  font-family:var(--font-mono); font-size:0.56rem;
+  letter-spacing:0.22em; text-transform:uppercase; color:var(--muted);
+}
+.scroll-bar {
+  width:1px; height:2.25rem;
+  background:linear-gradient(to bottom, var(--accent), transparent);
+  animation:sp 2s ease-in-out infinite;
+}
+@keyframes sp { 0%,100%{opacity:0.25} 50%{opacity:1} }
+
+/* ── SHARED SECTION ── */
+section { padding:3.75rem 3rem; position:relative; }
+.section-inner { max-width:1100px; margin:0 auto; }
+
+.section-label {
+  font-family:var(--font-mono);
+  font-size:0.6rem; letter-spacing:0.22em;
+  text-transform:uppercase; color:var(--accent);
+  margin-bottom:0.4rem;
+  display:flex; align-items:center; gap:0.7rem;
+}
+.section-label::before {
+  content:''; display:block; width:1.4rem; height:1px; background:var(--accent);
+}
+
+.section-h2 {
+  font-family:var(--font-disp);
+  font-size:clamp(2.6rem,5.5vw,5rem);
+  letter-spacing:0.04em; color:var(--accent);
+  line-height:0.93; margin-bottom:2rem;
+}
+
+hr.rule { border:none; border-top:1px solid var(--border); margin:0; }
+
+/* ── REALITY ── */
+.reality { background:var(--bg); }
+
+.reality-grid {
+  display:grid; grid-template-columns:1fr 2fr;
+  gap:3.5rem; align-items:start;
+}
+@media(max-width:768px){ .reality-grid { grid-template-columns:1fr; gap:1.75rem; } }
+
+.reality-sidebar { position:sticky; top:6rem; }
+
+.context-pill {
+  display:inline-block;
+  font-family:var(--font-mono); font-size:0.58rem;
+  letter-spacing:0.18em; text-transform:uppercase;
+  padding:0.28rem 0.65rem;
+  border:1px solid var(--accent-mid);
+  color:var(--accent); border-radius:2px;
+  margin-bottom:0.9rem; background:var(--accent-dim);
+}
+.sidebar-heading {
+  font-family:var(--font-disp);
+  font-size:clamp(1.8rem,3.5vw,3rem);
+  letter-spacing:0.06em; color:var(--accent);
+  line-height:1; margin-bottom:1rem;
+}
+.sidebar-meta {
+  font-size:0.8rem; color:var(--muted);
+  line-height:1.65; border-left:2px solid var(--accent);
+  padding-left:1rem;
+}
+
+.reality-body {
+  font-size:clamp(0.92rem,1.3vw,1rem);
+  font-weight:300; color:var(--text);
+  line-height:1.8; margin-bottom:1.75rem;
+}
+.reality-body .highlight {
+  font-family:var(--font-disp); font-size:1.35em;
+  color:var(--accent); letter-spacing:0.04em;
+}
+
+.reality-img-wrap {
+  position:relative; margin-bottom:1.75rem;
+  border:1px solid var(--border); overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+.reality-img-wrap img {
+  width:100%; display:block;
+  filter:grayscale(20%) contrast(1.04);
+  transition:filter 0.5s ease;
+}
+.reality-img-wrap:hover img { filter:grayscale(0%) contrast(1); }
+.img-caption {
+  padding:0.65rem 1rem;
+  font-family:var(--font-mono); font-size:0.58rem;
+  letter-spacing:0.14em; color:var(--muted);
+  text-transform:uppercase; border-top:1px solid var(--border);
+  background:var(--bg-2);
+}
+
+.pull-quote {
+  border-left:3px solid var(--accent);
+  padding:1.1rem 1.6rem;
+  background:var(--bg-2);
+  position:relative;
+}
+.pull-quote::before {
+  content:'"'; position:absolute; top:-0.5rem; left:1rem;
+  font-family:var(--font-disp); font-size:4rem;
+  color:var(--accent); opacity:0.15; line-height:1;
+}
+.pull-quote p {
+  font-size:clamp(0.95rem,1.6vw,1.1rem);
+  font-style:italic; font-weight:300;
+  color:var(--ink); line-height:1.65;
+}
+
+/* ── METHODOLOGY ── */
+.methodology { background:var(--bg-2); }
+
+.method-intro-grid {
+  display:grid; grid-template-columns:1fr 2fr;
+  gap:3.5rem; margin-bottom:2.25rem; align-items:start;
+}
+@media(max-width:768px){ .method-intro-grid { grid-template-columns:1fr; gap:1.25rem; } }
+
+.method-intro-body {
+  font-size:0.92rem; font-weight:300;
+  color:var(--muted); line-height:1.7; max-width:44ch;
+}
+
+.method-cards {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--border); border-radius:2px; overflow:hidden;
+  background:var(--border);
+  box-shadow:0 2px 16px rgba(0,0,0,0.05);
+}
+@media(max-width:680px){ .method-cards { grid-template-columns:1fr; } }
+
+.method-card {
+  padding:1.75rem 1.6rem;
+  position:relative; transition:background 0.3s ease;
+  background:var(--bg);
+}
+@media(min-width:681px){ .method-card { border-right:1px solid var(--border); } }
+@media(max-width:680px){ .method-card { border-bottom:1px solid var(--border); } }
+.method-card:last-child { border-right:none; border-bottom:none; }
+.method-card:hover { background:var(--bg-2); }
+.method-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--accent); transform:scaleX(0); transform-origin:left;
+  transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+.method-card:hover::before { transform:scaleX(1); }
+
+.card-num {
+  font-family:var(--font-mono); font-size:0.56rem;
+  letter-spacing:0.2em; color:var(--muted);
+  margin-bottom:0.9rem; display:block;
+}
+.card-icon {
+  width:2rem; height:2rem;
+  color:var(--accent); margin-bottom:0.75rem; stroke-width:1.25;
+}
+.card-title {
+  font-family:var(--font-disp); font-size:1.8rem;
+  letter-spacing:0.1em; color:var(--accent);
+  margin-bottom:0.5rem; line-height:1;
+}
+.card-body {
+  font-size:0.84rem; font-weight:300;
+  color:var(--text); line-height:1.6; margin-bottom:0.4rem;
+}
+.card-examples {
+  font-size:0.74rem; font-style:italic; color:var(--muted); line-height:1.5;
+}
+
+/* ── CTA ── */
+.cta-section {
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  padding:3.75rem 3rem 4rem;
+}
+.cta-inner { max-width:1100px; margin:0 auto; }
+
+.cta-heading {
+  font-family:var(--font-disp);
+  font-size:clamp(3.5rem,9vw,8rem);
+  letter-spacing:0.05em; color:var(--accent);
+  line-height:0.88; margin-bottom:0.85rem;
+}
+
+.cta-sub {
+  font-size:0.92rem; font-weight:300;
+  color:var(--muted); max-width:52ch;
+  line-height:1.7; margin-bottom:2rem;
+}
+
+.form-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:1px; background:var(--border);
+  border:1px solid var(--border); max-width:660px;
+  margin-bottom:1px;
+  box-shadow:0 1px 4px rgba(0,0,0,0.04);
+}
+@media(max-width:500px){ .form-grid { grid-template-columns:1fr; } }
+
+.form-field { background:var(--bg); }
+.form-field input {
+  width:100%; padding:1rem 1.2rem;
+  background:transparent; border:none; outline:none;
+  color:var(--ink); font-family:var(--font-mono);
+  font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase;
+  transition:background 0.2s;
+}
+.form-field input::placeholder { color:var(--muted); }
+.form-field input:focus { background:var(--bg-2); }
+
+.submit-wrap {
+  max-width:660px; margin-top:1.4rem;
+  display:flex; align-items:center; gap:1.75rem; flex-wrap:wrap;
+}
+.cta-btn {
+  display:inline-flex; align-items:center; gap:0.65rem;
+  padding:0.9rem 2rem;
+  background:var(--accent); color:#fff;
+  font-family:var(--font-disp); font-size:1.2rem;
+  letter-spacing:0.12em; border:none; cursor:pointer;
+  position:relative; overflow:hidden;
+  transition:transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius:2px;
+}
+.cta-btn::after {
+  content:''; position:absolute; inset:0;
+  background:rgba(0,0,0,0.08);
+  transform:translateX(-100%); transition:transform 0.3s ease;
+}
+.cta-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(30,92,46,0.25); }
+.cta-btn:hover::after { transform:translateX(0); }
+.cta-btn svg { width:0.9rem; height:0.9rem; stroke-width:2; }
+
+.social-proof {
+  font-family:var(--font-mono); font-size:0.58rem;
+  letter-spacing:0.14em; color:var(--muted); text-transform:uppercase;
+}
+.social-proof span { color:var(--accent); }
+
+/* ── FOOTER ── */
+.site-footer {
+  padding:1.4rem 3rem;
+  border-top:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:0.75rem; background:var(--bg-2);
+}
+.footer-brand {
+  font-family:var(--font-disp); font-size:0.95rem;
+  letter-spacing:0.14em; color:var(--accent);
+}
+.footer-copy {
+  font-size:0.62rem; font-family:var(--font-mono);
+  color:var(--muted); letter-spacing:0.12em;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity:0; transform:translateY(26px);
+  transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+.d1 { transition-delay:0.1s; }
+.d2 { transition-delay:0.22s; }
+.d3 { transition-delay:0.36s; }
+
+@media(max-width:600px){
+  .site-header { padding:1rem 1.25rem; }
+  section, .hero, .cta-section { padding-left:1.25rem; padding-right:1.25rem; }
+  .site-footer { padding:1.1rem 1.25rem; }
+  .header-tag { display:none; }
+  .hero::after { display:none; }
+  .hero-inner { padding-left:0; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="#" class="header-logo-text">UPTIME ALLIANCE</a>
+  <span class="header-tag">Est. 2024 — Formerly Oxygen Alliance</span>
+  <span class="live-dot">New Chapter</span>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-num" aria-hidden="true">UA</div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <p class="eyebrow">Introducing our next chapter</p>
+      <div class="hero-transition">
+        <span class="hero-from">Oxygen Alliance</span>
+        <span class="hero-bridge-word">is evolving to become</span>
+        <span class="hero-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+      <h1 class="hero-heading">UPTIME ALLIANCE.</h1>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-num" data-count="70" data-suffix="%">70%</span>
+        <span class="stat-label">of biomedical devices sit idle in LMICs</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num" data-count="2021" data-suffix="">2021</span>
+        <span class="stat-label">Founded during COVID-19 crisis</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num" data-count="3" data-suffix="">3</span>
+        <span class="stat-label">Pillars: Advocate · Educate · Innovate</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ── REALITY ── -->
+<section class="reality">
+  <div class="section-inner">
+    <div class="reality-grid">
+      <div class="reality-sidebar reveal">
+        <span class="context-pill">The Context</span>
+        <h2 class="sidebar-heading">The Oxygen Alliance Era.</h2>
+        <p class="sidebar-meta">
+          COVID-19 Pandemic, 2021.<br><br>
+          Critical failure of medical oxygen systems across low- and middle-income countries.
+        </p>
+      </div>
+
+      <div>
+        <p class="section-label reveal">The Reality</p>
+
+        <p class="reality-body reveal d1">
+          When Oxygen Alliance was founded in 2021, we set out to address a critical challenge at the height of the COVID-19 pandemic: non-functional medical oxygen systems in low- and middle-income countries (LMICs). These essential yet idle devices were contributing to preventable loss of life. As this work progressed, it became clear that oxygen equipment failures were not the root problem, but rather a visible symptom of a much broader systemic issue. Across many settings, <span class="highlight">up&nbsp;to&nbsp;70%</span> of biomedical equipment was non-functional, driven by limited maintenance capacity, shortages of spare parts, insufficiently trained biomedical personnel, and competing national priorities.
+        </p>
+
+        <div class="reality-img-wrap reveal d2">
+          <img src="https://139631026.fs1.hubspotusercontent-eu1.net/hubfs/139631026/End%20year%20wrap%20up%20newsletter%20assets/Final%20Collage.png" alt="Biomedical work in the field" loading="lazy">
+          <div class="img-caption">Field operations — LMICs, 2021–2024</div>
+        </div>
+
+        <div class="pull-quote reveal d3">
+          <p>"We realised that fighting fires was the wrong strategy. We needed to strengthen the entire health system by focusing on equipment uptime."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ── METHODOLOGY ── -->
+<section class="methodology">
+  <div class="section-inner">
+    <div class="method-intro-grid">
+      <div>
+        <p class="section-label reveal">Our Methodology</p>
+        <h2 class="section-h2 reveal d1">THE NEW STANDARD.</h2>
+      </div>
+      <p class="method-intro-body reveal d2">
+        Three interlocking pillars that move us from reactive crisis response to proactive systemic change — building durable health infrastructure across LMICs.
+      </p>
+    </div>
+
+    <div class="method-cards reveal">
+      <div class="method-card">
+        <span class="card-num">01 / 03</span>
+        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <h3 class="card-title">ADVOCATE</h3>
+        <p class="card-body">Mobilize stakeholders and resources to drive policy change and strengthen the ecosystem.</p>
+        <p class="card-examples">(Stakeholder Engagement)</p>
+      </div>
+
+      <div class="method-card">
+        <span class="card-num">02 / 03</span>
+        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+        </svg>
+        <h3 class="card-title">EDUCATE</h3>
+        <p class="card-body">Generate and share data, and support continuous professional development.</p>
+        <p class="card-examples">(Situational Analysis, BEST-LMIC Journal, Webinars, Coaching and Mentorship)</p>
+      </div>
+
+      <div class="method-card">
+        <span class="card-num">03 / 03</span>
+        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="18" cy="5" r="3"/>
+          <circle cx="6" cy="12" r="3"/>
+          <circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        <h3 class="card-title">INNOVATE</h3>
+        <p class="card-body">Develop tools and solutions for the biomedical ecosystem.</p>
+        <p class="card-examples">(BME Konza App, STEP-BME)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="section-label reveal">The Commitment</p>
+    <h2 class="cta-heading reveal d1">COMMIT<br>TO <span class="accent">UPTIME.</span></h2>
+    <p class="cta-sub reveal d2">
+      The site is under construction. The mission is not. Reaffirm your commitment and be the first to know when the new platform launches.
+    </p>
+
+    <form id="uptime-form" autocomplete="off">
+      <div class="form-grid reveal d1">
+        <div class="form-field"><input type="text" name="firstName" placeholder="First Name" required></div>
+        <div class="form-field"><input type="text" name="lastName" placeholder="Last Name" required></div>
+      </div>
+      <div class="form-grid reveal d2">
+        <div class="form-field"><input type="text" name="organization" placeholder="Organization" required></div>
+        <div class="form-field"><input type="email" name="email" placeholder="Email Address" required></div>
+      </div>
+      <div class="submit-wrap reveal d3">
+        <button type="submit" class="cta-btn">
+          I Commit to Uptime
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <span class="social-proof">Joining health system champions across <span>LMICs</span></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <span class="footer-brand">UPTIME ALLIANCE</span>
+  <span class="footer-copy">© 2024 Uptime Alliance — Formerly Oxygen Alliance</span>
+</footer>
+
+<script>
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Counter animation
+function animateCount(el, target, suffix, dur){
+  let start = null;
+  const step = ts => {
+    if(!start) start = ts;
+    const p = Math.min((ts - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(ease * target) + suffix;
+    if(p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const el = e.target;
+      const count = +el.dataset.count;
+      const sfx = el.dataset.suffix || '';
+      animateCount(el, count, sfx, count > 100 ? 1200 : 900);
+      cio.unobserve(el);
+    }
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('.stat-num[data-count]').forEach(el => cio.observe(el));
+
+// Form submit
+document.getElementById('uptime-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const btn = this.querySelector('.cta-btn');
+  btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:.9rem;height:.9rem;stroke-width:2.5"><polyline points="20 6 9 17 4 12"/></svg> Committed. We\'ll be in touch.';
+  btn.disabled = true;
+  btn.style.opacity = '0.85';
+});
+</script>
+</body>
+</html>
