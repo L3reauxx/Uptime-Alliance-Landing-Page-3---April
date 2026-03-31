@@ -135,6 +135,14 @@ body::before {
 /* Left column */
 .hero-left { display:flex; flex-direction:column; }
 
+.hero-brand-logo {
+  max-width: clamp(120px, 15vw, 180px);
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 0.8s 0.1s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
 .eyebrow {
   font-family:var(--font-mono);
   font-size:0.6rem; letter-spacing:0.22em;
@@ -540,6 +548,7 @@ hr.rule { border:none; border-top:1px solid var(--border); margin:0; }
   <div class="hero-bg-num" aria-hidden="true">UA</div>
   <div class="hero-inner">
     <div class="hero-left">
+      <img src="./Logos/uptime-logo-coloured.png" alt="Uptime Alliance Logo" class="hero-brand-logo">
       <p class="eyebrow">Introducing our next chapter</p>
       <div class="hero-transition">
         <span class="hero-from">Oxygen Alliance</span>
